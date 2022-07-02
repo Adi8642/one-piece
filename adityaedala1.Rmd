@@ -1,0 +1,388 @@
+---
+title: "eda_la1"
+author: "aditya"
+date: '2022-07-02'
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r}
+value<-read.csv(file.choose(),sep=',',header=TRUE);
+value;
+
+```
+```{r}
+value; 
+```
+```{r}
+ class(value);
+```
+```{r}
+ value1<-as.factor(value$Country.name);
+``` 
+```{r}
+ value1;
+``` 
+```{r}
+ value2<-as.numeric(value1);
+```
+```{r}
+ value2<-as.numeric(value1);
+```
+```{r}
+ value2;
+``` 
+```{r}
+ as.factor(value2);
+```
+```{r}
+ value[1];
+```
+```{r}
+ value[3];
+```
+
+```{r}
+ value[1:3];
+```
+
+```{r}
+ value[-1];
+```
+
+```{r}
+ value[c(1,3,4,8)];
+``` 
+
+```{r}
+ value[value>5];
+```
+```{r}
+ length(value);
+```
+
+```{r}
+ value[(length(value)-2):length(value)];
+```
+```{r}
+ max(value$lowerwhisker);
+```
+
+```{r}
+ max(value$Country.name);
+```
+
+```{r}
+ min(value$lowerwhisker);
+```
+
+```{r}
+ max(value$Regional.indicator);
+```
+
+```{r}
+ which(value==max(value$Country.name));
+```
+```{r}
+ value[seq(1,length(value),5)];
+```
+
+```{r}
+ sort(value$Country.name);
+```
+
+```{r}
+ sort(value$Standard.error.of.ladder.score);
+```
+```{r}
+ sort(value$Social.support);
+```
+```{r}
+ order(value$Country.name); 
+```
+```{r}
+ order(value$Standard.error.of.ladder.score);
+```
+```{r}
+ sort(value$Social.support);
+```
+```{r}
+ rank(value$Country.name);
+```
+
+```{r}
+ rank(value$Standard.error.of.ladder.score);
+```
+```{r}
+ rank(value$Social.support);
+```
+```{r}
+ value[3,3];
+```
+
+```{r}
+ value[3,1:4];
+```
+
+```{r}
+ value[,3];
+```
+
+```{r}
+ value[c(1,3,5,7),-4];
+```
+
+```{r}
+ value[c(1,3,5,7),"Social.support"];
+```
+
+```{r}
+ value[3];
+```
+
+```{r}
+ value[c(1,100),];
+```
+
+```{r}
+ order(value$upperwhisker,value[,2]);
+```
+```{r}
+ summary(value);
+```
+
+```{r}
+ str(value);
+``` 
+```{r}
+ with(value,order(value$upperwhisker,value$Social.support));
+```
+
+```{r}
+ value$lowerwhisker;
+```
+
+```{r}
+ value$Regional.indicator;
+```
+
+```{r}
+ value$Regional.indicator[1:4];
+```
+
+```{r}
+ value[,'Regional.indicator'];
+```
+
+```{r}
+ search();
+```
+
+```{r}
+ with(value,Regional.indicator);
+```
+
+```{r}
+ with(value,upperwhisker);
+```
+
+```{r}
+head(value);
+```
+
+```{r}
+ tail(value);
+```
+
+```{r}
+head(value,n=10);
+```
+```{r}
+ summary(value);
+```
+```{r}
+ names(value)
+```
+
+```{r}
+ row.names(value);
+```
+
+```{r}
+ colnames(value);
+```
+
+```{r}
+ dimnames(value);
+```
+
+```{r}
+ value4.mat=as.matrix(value);
+value4.mat;
+```
+
+```{r}
+ value5.list=as.list(value);
+value5.list;
+```
+
+```{r}
+ mean(value$upperwhisker);
+```
+
+```{r}
+ mean(value$Ladder.score);
+```
+
+```{r}
+ min(value$upperwhisker);
+```
+
+```{r}
+ min(value$Ladder.score);
+```
+
+```{r}
+ max(value$upperwhisker);
+```
+
+```{r}
+ max(value$Ladder.score);
+```
+
+```{r}
+ length(value$upperwhisker);
+```
+
+```{r}
+ sd(value$upperwhisker);
+```
+
+```{r}
+ sd(value$Ladder.score);
+```
+
+```{r}
+ log(value$Ladder.score);
+```
+
+```{r}
+ quantile(value$Ladder.score);
+```
+
+```{r}
+ fivenum(value$Ladder.score);
+```
+
+```{r}
+ quantile(value$Ladder.score,0.2);
+
+```{r}
+ quantile(value$Ladder.score,c(0.2,0.5,0.8));
+```
+
+```{r}
+ quantile(value$Ladder.score,c(0.5,0.75,0.25));
+```
+
+```{r}
+ cumsum(value$Ladder.score);
+```
+
+```{r}
+ cummax(value$Ladder.score);
+```
+
+```{r}
+ cummin(value$Ladder.score);
+```
+
+```{r}
+ cumprod(value$Ladder.score);
+```
+
+```{r}
+ seq(along=value);
+```
+```{r}
+ seq_along(value);
+```
+```{r}
+ seq(from=1,to=10,by=2);
+```
+
+```{r}
+ library(dplyr);
+value %>% mutate(newcol=1);
+```
+
+```{r}
+ value %>% select(-Logged.GDP.per.capita);
+```
+
+```{r}
+ value %>% select(Ladder.score,everything());
+```
+
+```{r}
+value %>% filter(Country.name=="New Zealand" & Ladder.score>=6.965 &
+Ladder.score<=7.277);
+```
+
+```{r}
+value %>% filter(Country.name=="New Zealand" & Ladder.score>=6.965 &
+Ladder.score<=7.277) %>% select(Country.name,Ladder.score);
+```
+
+```{r}
+value %>% rename(Country=Country.name);
+```
+
+```{r}
+with(value,table(upperwhisker,Ladder.score));
+```
+
+
+```{r}
+library(ggplot2);
+ggplot(value,aes(x=Ladder.score, y=upperwhisker))+geom_point();
+```
+
+```{r}
+ggplot(value,aes(x=Ladder.score, y=upperwhisker))+geom_point();
+```
+```{r}
+library(dplyr);
+vec<-rep(c(2),149);
+value %>% mutate(newcol1=vec);
+```
+```{r}
+library(ggplot2);
+ggplot(value,aes(x=Ladder.score, y=upperwhisker))+geom_line();
+```
+
+```{r}
+ggplot(value,aes(x=Ladder.score, y=upperwhisker))+geom_line()+geom_point();
+```
+
+```{r}
+ggplot(value,aes(x=Ladder.score, y=upperwhisker))+geom_col();
+```
+
+```{r}
+ggplot(value,aes(x=Ladder.score))+geom_bar();
+```
+
+```{r}
+ggplot(value,aes(x=Ladder.score))+geom_histogram();
+```
+
+```{r}
+ggplot(value,aes(x=Ladder.score))+geom_histogram(binwidth=4);
+```
+```{r}
+ggplot(value,aes(x=Ladder.score, y=upperwhisker))+geom_boxplot();
+```
+
+
