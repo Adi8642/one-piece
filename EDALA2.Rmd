@@ -1,0 +1,322 @@
+---
+title: "EDA_LA2"
+author: "Aditya A V S"
+date: '2022-07-04'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+
+data<-read.csv("C:/Users/anany/Downloads/world-happiness-report-2021.csv",header=TRUE,sep=',')
+```
+```{r}
+
+data
+```
+```{r}
+colnames(data)
+```
+scatter plot plotted for n_student in x axis and pretest in y axis
+```{r}
+library(ggplot2)
+plot(data$Ladder.score,data$lowerwhisker)
+```
+Visualizing the scatter plot using ggplot() function
+```{r}
+ggplot(data,aes(x=Ladder.score,y=upperwhisker))+geom_point()
+```
+
+Visualizing the scatter plot using ggplot() function when x and y values are vectors
+```{r}
+ggplot(NULL,aes(x=data$Ladder.score,y=data$Social.support))+geom_point()
+```
+
+Visualizing the line graph using plot function by passing x and y parameters
+```{r}
+plot(data$Ladder.score,data$Social.support,type="l");
+```
+
+
+
+Visualizing the line graph using the ggplot() function
+```{r}
+ggplot(data,aes(x=lowerwhisker,y=upperwhisker)) + geom_line()
+```
+Visualizing the line graph using geom_line() function and plotting the points on top of it
+```{r}
+ggplot(data,aes(x=upperwhisker,y=lowerwhisker)) + geom_line()+geom_point()
+```
+
+Visualizing the bar graph by plotting x and y axis using barplot function
+```{r}
+barplot(data$Ladder.score,names.arg=data$lowerwhisker)
+```
+
+Visualizing the bargraph using ggplot() function
+```{r}
+ggplot(data,aes(x=lowerwhisker,y=upperwhisker))+geom_col()
+```
+
+Visualizing the bargraph using ggplot() function using geom_bar() function
+```{r}
+ggplot(data,aes(x=lowerwhisker))+geom_bar()
+```
+
+Visualizing the histograms using the hist() function
+```{r}
+hist(data$Ladder.score,breaks=10)
+```
+Visualizing the histograms using the ggplot() function
+```{r}
+ggplot(data,aes(x=Ladder.score)) + geom_histogram(binwidth = 4)
+```
+
+Visualizing the bargraph using ggplot() function and it fills the light blue colour to the bars and the border lines of the bar will be black
+```{r}
+ggplot(data,aes(x=Ladder.score,y=data$lowerwhisker)) + geom_col(fill="lightblue",colour="black")
+```
+Visualizing the bargraph and mapping the posttest coloumn to the fill colour
+```{r}
+ggplot(data,aes(x=Ladder.score,y=lowerwhisker,fill=upperwhisker))+geom_col(position="dodge")
+```
+
+
+Bar of points
+```{r}
+ggplot(data,aes(x=Ladder.score))+geom_bar()
+
+
+```
+
+Creating a boxplot using boxplot() function
+```{r}
+plot(data$Ladder.score, data$lowerwhisker)
+
+```
+
+Put interaction of two variables on x-axis
+```{r}
+boxplot(Ladder.score ~  + lowerwhisker, data = data)
+```
+
+Visualization of boxplot using the ggplot() function
+```{r}
+ggplot(data, aes(x = upperwhisker, y = Ladder.score)) + geom_boxplot()
+
+```
+
+Make box plots for multiple variables, by combining the variables
+with interaction(),
+```{r}
+ggplot(data, aes(x = interaction(lowerwhisker, Ladder.score), y = upperwhisker)) + geom_boxplot()
+
+```
+
+When the x variable is a factor, you must also use aes(group=1) to
+ensure that ggplot knows that the data points belong together and should be connected with a line
+```{r}
+ggplot(data, aes(x = upperwhisker, y = lowerwhisker, group = 1)) + geom_line()
+```
+
+Variables mapped to the x- and y-axes, map another (discrete) vari‐
+able to colour or linetype
+```{r}
+ggplot(data, aes(x = upperwhisker, y = lowerwhisker, colour = "red")) + geom_line()
+
+
+```
+
+
+Changing the appearnce of the lines
+```{r}
+ggplot(data, aes(x = lowerwhisker, y = upperwhisker)) +
+ geom_line(linetype = "dashed", size = 1, colour = "blue")
+```
+
+In geom_point(), set the size, shape, colour, and/or fill outside of aes() (the
+result is shown
+```{r}
+ggplot(data, aes(x = upperwhisker, y = lowerwhisker)) + geom_line() +
+ geom_point(size = 4, shape = 22, colour = "darkred", fill = "pink")
+```
+
+ Visualizing the density curve using geom_density() fucntion and map a continuous variable n_student to x
+```{r}
+ggplot(data, aes(x = lowerwhisker)) +
+ geom_density()
+```
+
+It removes the lines along the bottom and side and using expand_limits() increases the y range to include the value 0
+```{r}
+ggplot(data, aes(x =Ladder.score)) + geom_line(stat = "density") +
+ expand_limits(y = 0)
+
+```
+
+Visualizing the density curve using the geom_line function and using a adjust parameter which is used to get the extent to which the density curve should be smoother
+```{r}
+ggplot(data, aes(x = lowerwhisker)) +
+ geom_line(stat = "density") +
+ geom_line(stat = "density", adjust = .25, colour = "red") +
+ geom_line(stat = "density", adjust = 2, colour = "blue")
+```
+
+
+Visualizing the frequency polygon
+```{r}
+ggplot(data, aes(x=Ladder.score)) +  geom_freqpoly()
+
+
+```
+
+Visualizing the frequency polygon along with the bandwidth parameter
+```{r}
+ggplot(data, aes(x = upperwhisker)) +  geom_freqpoly(binwidth = 4)
+
+```
+
+Visualization of the boxplot by changing the width of the bars
+```{r}
+ggplot(data, aes(x = factor(Ladder.score), y = upperwhisker)) + geom_boxplot(width = .5)
+```
+
+Visualization of the a box plot of just a single group, we have to provide some arbitrary value for x.In this case,we’ll set it to 1 and remove the x-axis tick markers and label
+```{r}
+ggplot(data, aes(x = 1, y = Ladder.score)) +
+ geom_boxplot() +
+ scale_x_continuous(breaks = NULL) +
+ theme(axis.title.x = element_blank())
+
+```
+
+
+Adding the notches to the box plot using  geom_boxplot() and set notch = TRUE
+```{r}
+ggplot(data, aes(x = factor(lowerwhisker), y = upperwhisker)) +
+ geom_boxplot(notch = TRUE)
+```
+
+Visualizing the box plot by adding the stat_summary function which includes the function of mean which leads to adding of the means to the boxplot
+```{r}
+ggplot(data, aes(x = factor(lowerwhisker), y = upperwhisker)) +
+ geom_boxplot() +
+ stat_summary(fun.y = "mean", geom = "point", shape = 23, size = 3,
+ fill = "white")
+```
+
+Visualization of the violin plot 
+```{r}
+ ggplot(data, aes(x = Ladder.score, y = lowerwhisker)) + geom_violin()
+```
+
+Visualization of the violin plot with the boxplpot overlaid on it
+```{r}
+
+ggplot(data,aes(x=lowerwhisker,y=upperwhisker))+ geom_violin() +
+ geom_boxplot(width = .1, fill = "black", outlier.colour = NA) +
+ stat_summary(fun.y = median, geom = "point", fill = "white", shape = 21,
+ size = 2.5)
+```
+
+
+Visualization of the violin plot by adding tails at the end
+```{r}
+ggplot(data,aes(x=Ladder.score,y=lowerwhisker))+ geom_violin(trim = FALSE)
+
+```
+
+Visualization  of the violin plot with area proportional to number of observations
+```{r}
+ ggplot(data,aes(x=lowerwhisker,y=Ladder.score)) + geom_violin(scale = "count")
+```
+
+Visualization of the dot plot using the geom_dotplot() function
+```{r}
+ggplot(data, aes(x = Ladder.score)) +
+ geom_dotplot()
+```
+
+Visualization of dot plot using geom_dotplot() bins the data along the x-axis and stacks on the y-axis
+```{r}
+ ggplot(data,aes(x=upperwhisker)) +
+ geom_dotplot(binwidth = .25) +
+ geom_rug() +
+ scale_y_continuous(breaks = NULL) +
+ theme(axis.title.y = element_blank())
+```
+
+Visualization of dot plot using dotplot() function and to use bins that are arranged with a fixed, regular spacing, like a histogram.
+```{r}
+ ggplot(data,aes(x=Ladder.score)) +
+ geom_dotplot(method = "histodot", binwidth = .25) +
+ geom_rug() +
+ scale_y_continuous(breaks = NULL) +
+ theme(axis.title.y = element_blank())
+```
+Visualization of dot plot and the dots can also be stacked centered using stackdir="center"
+```{r}
+ ggplot(data,aes(x=lowerwhisker))+
+ geom_dotplot(binwidth = .25, stackdir = "center") +
+ scale_y_continuous(breaks = NULL) +
+ theme(axis.title.y = element_blank())
+```
+Visualization of dot plot and the dots can also be stacked centered using stackdir="centerwhole"
+```{r}
+  ggplot(data,aes(x=upperwhisker)) +
+ geom_dotplot(binwidth = .25, stackdir = "centerwhole") +
+ scale_y_continuous(breaks = NULL) +
+ theme(axis.title.y = element_blank())
+```
+Visualization of dotplot and to stack the dots along the y-axis, and group
+them along the x-axis, by setting binaxis = "y".
+```{r}
+ggplot(data, aes(x = Ladder.score, y = upperwhisker)) +
+ geom_dotplot(binaxis = "y", binwidth = .5, stackdir = "center")
+```
+Visualization of dot plots overlaid on box plots and to make the dots hollow and have the box plots not show outliers
+```{r}
+ggplot(data, aes(x = lowerwhisker, y = upperwhisker)) +
+ geom_boxplot(outlier.colour = NA, width = .4) +
+ geom_dotplot(binaxis = "y", binwidth = .5, stackdir = "center", fill = NA)
+```
+Visualization of dot plot on top of box plot by specifying binaxis,binwidth,stackdir 
+```{r}
+ggplot(data, aes(x = upperwhisker, y = lowerwhisker)) +
+ geom_boxplot(aes(x = as.numeric(upperwhisker) + .2, group = lowerwhisker), width = .25) +
+ geom_dotplot(
+ aes(x = as.numeric(upperwhisker) - .2, group = upperwhisker),
+ binaxis = "y",
+ binwidth = .5,
+ stackdir = "center"
+ ) +
+ scale_x_continuous(
+ breaks = 1:nlevels(data$lowerwhisker),
+ labels = levels(data$Ladder.score)
+ )
+```
+ Plotting the density of two-dimensional data
+```{r}
+ ggplot(data,aes(x=Ladder.score,y=lowerwhisker)) +
+ geom_point() +
+ stat_density2d()
+```
+Maps the height of the density curve to the color of the contour lines, by using ..level..
+ 
+```{r}
+ggplot(data,aes(x=upperwhisker,y=lowerwhisker))+
+ stat_density2d(aes(colour = ..level..))
+```
+Maps density estimate to fill color
+```{r}
+ggplot(data,aes(x=lowerwhisker,y=Ladder.score)) +
+ stat_density2d(aes(fill = ..density..), geom = "raster", contour = FALSE)
+```
+With points, and map density estimate to alpha
+```{r}
+ ggplot(data,aes(x=Ladder.score,y=lowerwhisker)) +
+ geom_point() +
+ stat_density2d(aes(alpha = ..density..), geom = "tile", contour = FALSE)
+```
+
